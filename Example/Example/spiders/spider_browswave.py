@@ -20,8 +20,6 @@ class BrowswaveSpider(scrapy.spiders.Spider):
       url = 'https://mr-bricolage.bg' + href.extract()
       yield scrapy.Request(url, callback=self.parse_dir_contents)
 
-    next_page_url = response.xpath("//ul[@class='pagination']/li[@class='active']/a/@href").extract_first()
-
     if next_page_url:
       next_page_url = response.urljoin(next_page_url)
       yield scrapy.Request(url=next_page_url, callback=self.parse)
